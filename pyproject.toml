@@ -5,7 +5,7 @@ description = "Tools to easily setup databases with sqlmodel"
 authors = ["Jonas Scholl <jonas@code-specialist.com>","Yannic Schröer <yannic@code-specialist.com>"]
 license = "MIT"
 readme = "README.md"
-packages = [{include = "sqlmodel_setup_tools"}]
+packages = [{include = "database_setup_tools"}]
 
 [tool.poetry.dependencies]
 python = "^3.9"
