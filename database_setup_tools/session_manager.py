@@ -53,5 +53,5 @@ class SessionManager:
             yield session
 
     def _get_engine(self, **kwargs) -> Engine:
-        """ Provides a database engine with a maximum of 20 connections and no overflows. This allows up to 20 concurrent  """
+        """ Provides a database engine """
         return sqla.create_engine(self.database_uri, **kwargs)
