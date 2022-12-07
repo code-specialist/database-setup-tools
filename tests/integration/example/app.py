@@ -7,14 +7,14 @@ from sqlmodel import Session, SQLModel, Field
 from database_setup_tools.session_manager import SessionManager
 from database_setup_tools.setup import DatabaseSetup
 
-DATABASE_URI = "sqlite:///./test.db"
+DATABASE_URI = "sqlite:///test.db"
 
 app = FastAPI()
 session_manager = SessionManager(database_uri=DATABASE_URI)
 
 
 class User(SQLModel, table=True):
-    """ Game model """
+    """ User model """
     id: int = Field(index=True, primary_key=True)
     name: str
 

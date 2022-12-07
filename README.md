@@ -29,16 +29,17 @@ from sqlmodel import Session, SQLModel, Field
 from database_setup_tools.session_manager import SessionManager
 from database_setup_tools.setup import DatabaseSetup
 
-DATABASE_URI = "sqlite:///./test.db"
+DATABASE_URI = "sqlite:///test.db"
 
 app = FastAPI()
 session_manager = SessionManager(database_uri=DATABASE_URI)
 
 
 class User(SQLModel, table=True):
-    """ Game model """
+    """ User model """
     id: int = Field(index=True, primary_key=True)
     name: str
+
 
 model_metadata = SQLModel.metadata
 
@@ -59,10 +60,11 @@ def get_all_users(session: Session = Depends(session_manager.get_session)):
 
 
 if __name__ == '__main__':
-    # Creates the database on starup, if it doesn't exist yet
-    database_setup = DatabaseSetup(model_metadata=model_metadata, database_uri=DATABASE_URI) 
+    database_setup = DatabaseSetup(model_metadata=model_metadata, database_uri=DATABASE_URI)
     uvicorn.run(app, host='0.0.0.0', port=8080)
 ```
+
+ *See  [tests/integration/example/app.py](tests/integration/example/app.py)
 
 ## Example for pytest
 

@@ -3,7 +3,7 @@ import threading
 import sqlalchemy_utils
 from sqlalchemy import MetaData
 
-from database_setup_tools.session_manager import SessionManager
+from database_setup_tools import SessionManager
 
 
 class DatabaseSetup:
@@ -28,9 +28,7 @@ class DatabaseSetup:
         """
         self._model_metadata = model_metadata
         self._database_uri = database_uri
-        sqlalchemy_utils.create_database(self.database_uri)
-        session_manager = SessionManager(self.database_uri)
-        self.model_metadata.create_all(session_manager.engine)
+        self.create_database()
 
     @property
     def model_metadata(self) -> MetaData:
@@ -60,3 +58,9 @@ class DatabaseSetup:
             sqlalchemy_utils.drop_database(self.database_uri)
             return True
         return False
+
+    def create_database(self):
+        """ Create the database and the tables if not done yet """
+        sqlalchemy_utils.create_database(self.database_uri)
+        session_manager = SessionManager(self.database_uri)
+        self.model_metadata.create_all(session_manager.engine)
