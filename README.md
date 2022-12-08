@@ -5,7 +5,7 @@ Easy to understand and use tools that help you to create databases and interact 
 ## Installation
 
 ```bash
-pip install db-tools
+pip install database-setup-tools
 ```
 
 ## Features
