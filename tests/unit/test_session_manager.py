@@ -1,44 +1,51 @@
+from contextlib import contextmanager
+from typing import Callable
+
 import pytest as pytest
+from sqlalchemy.engine import Engine
 
 from database_setup_tools.session_manager import SessionManager
 
 
 class TestSessionManager:
-    @staticmethod
-    @pytest.mark.parametrize('database_uri', ['sqlite://', 'postgresql+psycopg2://'])
-    def test_session_manager_is_singleton(database_uri):
-        """ Test that the SessionManager is a singleton """
-        session_manager_1 = SessionManager(database_uri)
-        session_manager_2 = SessionManager(database_uri)
-        session_manager_3 = SessionManager(database_uri)
-        assert session_manager_1 is session_manager_2 is session_manager_3
 
-    @staticmethod
-    @pytest.mark.parametrize('database_uri', ['sqlite://', 'postgresql+psycopg2://'])
-    def test_database_uri(database_uri):
-        """ Test that the database URI is set correctly """
-        session_manager = SessionManager(database_uri)
+    @pytest.fixture
+    def database_uri(self) -> str:
+        return 'sqlite://'
+
+    @pytest.fixture
+    def session_manager(self, database_uri: str) -> SessionManager:
+        yield SessionManager(database_uri=database_uri)
+
+    @pytest.mark.parametrize("database_uri", ["sqlite://", "postgresql://"])
+    def test_session_manager_is_singleton_with_same_arguments(self, database_uri: str):
+        assert SessionManager(database_uri=database_uri) is SessionManager(database_uri=database_uri)
+
+    def test_session_manager_singletons_with_different_arguments(self):
+        database_uri_1, database_uri_2 = 'sqlite://', 'postgresql://'
+        assert SessionManager(database_uri=database_uri_1) is not SessionManager(database_uri=database_uri_2)
+
+    def test_database_uri(self, session_manager: SessionManager, database_uri: str):
         assert session_manager.database_uri == database_uri
 
-    @staticmethod
     @pytest.mark.parametrize('database_uri, name, driver', [
         ('sqlite://', 'sqlite', 'pysqlite'),
         ('postgresql+psycopg2://', 'postgresql', 'psycopg2')
     ])
-    def test_engine(database_uri, name, driver):
-        """ Test that the engine is set correctly """
+    def test_engine(self, database_uri: str, name: str, driver: str):
         session_manager = SessionManager(database_uri)
-        assert session_manager.engine == session_manager._engine
+        assert isinstance(session_manager.engine, Engine)
         assert session_manager.engine.name == name
         assert session_manager.engine.driver == driver
 
-    @staticmethod
-    def test_get_session_sqlite(database_uri: str = 'sqlite://'):
-        """ Test that the session is set correctly and usable """
-        session_manager = SessionManager(database_uri)
-        session = next(session_manager.get_session())
-        assert session.execute('SELECT 1').scalar() == 1
+    def test_get_session(self, session_manager: SessionManager, database_uri: str, when: Callable):
+        @contextmanager
+        def mocked_session():
+            try:
+                yield "mocked session"
+            finally:
+                pass
 
-        # Get a new session and try again
-        session = next(session_manager.get_session())
-        assert session.execute('SELECT 1').scalar() == 1
+        when(session_manager)._Session().thenReturn(mocked_session())
+
+        assert next(session_manager.get_session()) == "mocked session"

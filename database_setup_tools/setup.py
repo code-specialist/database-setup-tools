@@ -8,15 +8,15 @@ from database_setup_tools.session_manager import SessionManager
 
 class DatabaseSetup:
     """ Create the database and the tables if not done yet """
-    _instance = None
+    _instances = []
     _lock = threading.Lock()
 
     def __new__(cls, *args, **kwargs):
-        if not cls._instance:
+        if not cls._get_cached_instance(args, kwargs):
             with cls._lock:
-                if not cls._instance:
-                    cls._instance = super(DatabaseSetup, cls).__new__(cls)
-        return cls._instance
+                if not cls._get_cached_instance(args, kwargs):
+                    cls._instances.append((super(cls, cls).__new__(cls), (args, kwargs)))
+        return cls._get_cached_instance(args, kwargs)
 
     def __init__(self, model_metadata: MetaData, database_uri: str):
         """ Set up a database based on its URI and metadata. Will not overwrite existing data.
@@ -70,3 +70,11 @@ class DatabaseSetup:
         sqlalchemy_utils.create_database(self.database_uri)
         session_manager = SessionManager(self.database_uri)
         self.model_metadata.create_all(session_manager.engine)
+
+    @classmethod
+    def _get_cached_instance(cls, args: tuple, kwargs: dict) -> object | None:
+        """ Provides a cached instance of the SessionManager class if existing """
+        for instance, arguments in cls._instances:
+            if arguments == (args, kwargs):
+                return instance
+        return None
