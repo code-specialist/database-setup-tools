@@ -1,6 +1,6 @@
 import pytest as pytest
 
-from database_setup_tools import SessionManager
+from database_setup_tools.session_manager import SessionManager
 
 
 class TestSessionManager:

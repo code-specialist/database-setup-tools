@@ -2,7 +2,8 @@ import pytest
 from sqlalchemy.exc import OperationalError
 from sqlalchemy.orm.scoping import ScopedSession
 
-from database_setup_tools import DatabaseSetup, SessionManager
+from database_setup_tools.session_manager import SessionManager
+from database_setup_tools.setup import DatabaseSetup
 from tests.unit.sample_model import model_metadata
 
 
