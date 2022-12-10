@@ -26,6 +26,12 @@ class DatabaseSetup:
             database_uri (str): The URI of the database to create the tables for
 
         """
+        if not isinstance(model_metadata, MetaData):
+            raise TypeError("model_metadata must be a MetaData")
+
+        if not isinstance(database_uri, str):
+            raise TypeError("database_uri must be a string")
+
         self._model_metadata = model_metadata
         self._database_uri = database_uri
         self.create_database()

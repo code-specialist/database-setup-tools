@@ -20,12 +20,12 @@ psycopg2-binary = "^2.9.5"
 pytest-cov = "^4.0.0"
 pytest = "7.2.0"
 httpx = "0.23.1"
-
+mockito = "^1.4.0"
+pytest-mockito = "^0.0.4"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
-
 [tool.pytest.ini_options]
-addopts = "-x -p no:warnings --cov-report=term --cov-report=term-missing --no-cov-on-fail --cov=database_setup_tools"
+# addopts = "-x -p no:warnings --cov-report=term --cov-report=term-missing --no-cov-on-fail --cov=database_setup_tools"

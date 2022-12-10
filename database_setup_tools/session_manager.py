@@ -1,9 +1,11 @@
-import sqlalchemy as sqla
 import threading
+from functools import lru_cache, cached_property
+from typing import Iterator
+
+import sqlalchemy as sqla
 from sqlalchemy.engine import Engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm.scoping import ScopedSession, scoped_session
-from typing import Iterator
 
 
 class SessionManager:
@@ -42,7 +44,7 @@ class SessionManager:
         """ Getter for the database URI """
         return self._database_uri
 
-    @property
+    @cached_property
     def engine(self) -> Engine:
         """ Getter for the engine """
         return self._engine
@@ -52,6 +54,7 @@ class SessionManager:
         with self._Session() as session:
             yield session
 
+    @lru_cache(maxsize=1)
     def _get_engine(self, **kwargs) -> Engine:
         """ Provides a database engine """
         return sqla.create_engine(self.database_uri, **kwargs)
