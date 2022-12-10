@@ -1,7 +1,7 @@
 import pytest
 from starlette.testclient import TestClient
 
-from database_setup_tools import DatabaseSetup
+from database_setup_tools.setup import DatabaseSetup
 from tests.integration.example.app import app, model_metadata, DATABASE_URI
 
 database_setup = DatabaseSetup(model_metadata=model_metadata, database_uri=DATABASE_URI)
