@@ -64,7 +64,7 @@ if __name__ == '__main__':
     uvicorn.run(app, host='0.0.0.0', port=8080)
 ```
 
- *See  [tests/integration/example/app.py](tests/integration/example/app.py)
+ *See  [tests/integration/example/app.py](tests/sample_model.py)
 
 ## Example for pytest
 

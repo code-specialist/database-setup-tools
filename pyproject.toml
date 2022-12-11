@@ -28,4 +28,4 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.pytest.ini_options]
-# addopts = "-x -p no:warnings --cov-report=term --cov-report=term-missing --no-cov-on-fail --cov=database_setup_tools"
+addopts = "-x -p no:warnings --cov-report=term --cov-report=term-missing --no-cov-on-fail --cov=database_setup_tools"

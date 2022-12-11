@@ -6,7 +6,7 @@ from mockito import unstub
 
 from database_setup_tools.session_manager import SessionManager
 from database_setup_tools.setup import DatabaseSetup
-from tests.unit.sample_model import model_metadata
+from tests.sample_model import model_metadata
 
 
 class TestSetup:
