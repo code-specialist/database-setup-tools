@@ -34,6 +34,9 @@ class SessionManager:
                 max_overflow (int): The maximum number of connections to the database
                 pre_ping (bool): Whether to ping the database before each connection, may fix connection issues
         """
+        if not isinstance(database_uri, str):
+            raise TypeError("database_uri must be a string")
+
         self._database_uri = database_uri
         self._engine = self._get_engine(**kwargs)
         self._session_factory = sessionmaker(self.engine)

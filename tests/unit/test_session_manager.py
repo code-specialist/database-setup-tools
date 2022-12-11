@@ -1,5 +1,5 @@
 from contextlib import contextmanager
-from typing import Callable
+from typing import Callable, Any
 
 import pytest as pytest
 from sqlalchemy.engine import Engine
@@ -16,6 +16,11 @@ class TestSessionManager:
     @pytest.fixture
     def session_manager(self, database_uri: str) -> SessionManager:
         yield SessionManager(database_uri=database_uri)
+
+    @pytest.mark.parametrize('invalid_database_uri', [None, (), 42, False])
+    def test_create_session_manager_fail_invalid_database_uri_type(self, invalid_database_uri: Any):
+        with pytest.raises(TypeError):
+            SessionManager(database_uri=invalid_database_uri)
 
     @pytest.mark.parametrize("database_uri", ["sqlite://", "postgresql://"])
     def test_session_manager_is_singleton_with_same_arguments(self, database_uri: str):
