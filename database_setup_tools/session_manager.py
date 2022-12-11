@@ -1,5 +1,5 @@
 import threading
-from functools import cached_property
+from functools import cached_property, lru_cache
 from typing import Iterator, Optional
 
 import sqlalchemy as sqla
@@ -47,7 +47,7 @@ class SessionManager:
         """ Getter for the database URI """
         return self._database_uri
 
-    @cached_property
+    @property
     def engine(self) -> Engine:
         """ Getter for the engine """
         return self._engine

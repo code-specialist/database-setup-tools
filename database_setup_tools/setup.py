@@ -66,11 +66,14 @@ class DatabaseSetup:
             return True
         return False
 
-    def create_database(self):
+    def create_database(self) -> bool:
         """ Create the database and the tables if not done yet """
-        sqlalchemy_utils.create_database(self.database_uri)
-        session_manager = SessionManager(self.database_uri)
-        self.model_metadata.create_all(session_manager.engine)
+        if not sqlalchemy_utils.database_exists(self.database_uri):
+            sqlalchemy_utils.create_database(self.database_uri)
+            session_manager = SessionManager(self.database_uri)
+            self.model_metadata.create_all(session_manager.engine)
+            return True
+        return False
 
     @classmethod
     def _get_cached_instance(cls, args: tuple, kwargs: dict) -> Optional[object]:

@@ -55,10 +55,20 @@ class TestSetup:
     def test_create_database(self, database_setup: DatabaseSetup, database_uri: str, when: Callable, expect: Callable):
         unstub()  # remove stub for create_database method
 
+        when(sqlalchemy_utils).database_exists(database_uri).thenReturn(False)
         expect(sqlalchemy_utils, times=1).create_database(database_uri)
-        expect(database_setup.model_metadata, times=1).create_all(SessionManager(database_uri).engine)
+        expect(database_setup.model_metadata, times=1).create_all(...)  # can't check engine argument here because a new one is created for each access
 
-        database_setup.create_database()
+        assert database_setup.create_database() is True
+
+    def test_create_database_skip_if_exists(self, database_setup: DatabaseSetup, database_uri: str, when: Callable, expect: Callable):
+        unstub()  # remove stub for create_database method
+
+        when(sqlalchemy_utils).database_exists(database_uri).thenReturn(True)
+        expect(sqlalchemy_utils, times=0).create_database(database_uri)
+        expect(database_setup.model_metadata, times=0).create_all(SessionManager(database_uri).engine)
+
+        assert database_setup.create_database() is False
 
     def test_drop_database_success(self, database_setup: DatabaseSetup, database_uri: str, when: Callable, expect: Callable):
         when(sqlalchemy_utils).database_exists(database_uri).thenReturn(True)

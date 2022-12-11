@@ -2,25 +2,27 @@ from random import randint
 
 import pytest
 from fastapi import FastAPI, Depends
+from sqlalchemy.exc import OperationalError
 from sqlmodel import Session
 from starlette.testclient import TestClient
 
 from database_setup_tools.session_manager import SessionManager
 from database_setup_tools.setup import DatabaseSetup
+from tests.integration.database_config import DATABASE_URIS
 from tests.sample_model import model_metadata, User
 
 
-@pytest.mark.parametrize('database_uri', ["sqlite:///test.db"])
+@pytest.mark.parametrize('database_uri', DATABASE_URIS)
 class TestIntegrationDatabaseSetup:
 
-    @pytest.fixture
+    @pytest.fixture(scope='function')
     def database_setup(self, database_uri: str) -> DatabaseSetup:
         setup = DatabaseSetup(model_metadata=model_metadata, database_uri=database_uri)
         yield setup
         setup.drop_database()
 
-    @pytest.fixture
-    def session_manager(self, database_uri: str) -> SessionManager:
+    @pytest.fixture(scope='function')
+    def session_manager(self, database_uri: str, database_setup: DatabaseSetup) -> SessionManager:
         return SessionManager(database_uri=database_uri)
 
     @pytest.fixture
@@ -45,11 +47,6 @@ class TestIntegrationDatabaseSetup:
     @pytest.fixture
     def test_client(self, fastapi_app: FastAPI) -> TestClient:
         return TestClient(fastapi_app)
-
-    @pytest.fixture(scope="function", autouse=True)
-    def setup(self, database_setup: DatabaseSetup, ):
-        database_setup.drop_database()
-        database_setup.create_database()
 
     def test_get_all_users(self, test_client: TestClient):
         response = test_client.get('/users/')
