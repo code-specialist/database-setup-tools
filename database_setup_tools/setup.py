@@ -1,4 +1,5 @@
 import threading
+from typing import Optional
 
 import sqlalchemy_utils
 from sqlalchemy import MetaData
@@ -72,7 +73,7 @@ class DatabaseSetup:
         self.model_metadata.create_all(session_manager.engine)
 
     @classmethod
-    def _get_cached_instance(cls, args: tuple, kwargs: dict) -> object | None:
+    def _get_cached_instance(cls, args: tuple, kwargs: dict) -> Optional[object]:
         """ Provides a cached instance of the SessionManager class if existing """
         for instance, arguments in cls._instances:
             if arguments == (args, kwargs):
