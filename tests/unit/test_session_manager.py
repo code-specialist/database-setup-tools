@@ -8,16 +8,15 @@ from database_setup_tools.session_manager import SessionManager
 
 
 class TestSessionManager:
-
     @pytest.fixture
     def database_uri(self) -> str:
-        return 'sqlite://'
+        return "sqlite://"
 
     @pytest.fixture
     def session_manager(self, database_uri: str) -> SessionManager:
         yield SessionManager(database_uri=database_uri)
 
-    @pytest.mark.parametrize('invalid_database_uri', [None, (), 42, False])
+    @pytest.mark.parametrize("invalid_database_uri", [None, (), 42, False])
     def test_create_session_manager_fail_invalid_database_uri_type(self, invalid_database_uri: Any):
         with pytest.raises(TypeError):
             SessionManager(database_uri=invalid_database_uri)
@@ -27,16 +26,13 @@ class TestSessionManager:
         assert SessionManager(database_uri=database_uri) is SessionManager(database_uri=database_uri)
 
     def test_session_manager_singletons_with_different_arguments(self):
-        database_uri_1, database_uri_2 = 'sqlite://', 'postgresql://'
+        database_uri_1, database_uri_2 = "sqlite://", "postgresql://"
         assert SessionManager(database_uri=database_uri_1) is not SessionManager(database_uri=database_uri_2)
 
     def test_database_uri(self, session_manager: SessionManager, database_uri: str):
         assert session_manager.database_uri == database_uri
 
-    @pytest.mark.parametrize('database_uri, name, driver', [
-        ('sqlite://', 'sqlite', 'pysqlite'),
-        ('postgresql+psycopg2://', 'postgresql', 'psycopg2')
-    ])
+    @pytest.mark.parametrize("database_uri, name, driver", [("sqlite://", "sqlite", "pysqlite"), ("postgresql+psycopg2://", "postgresql", "psycopg2")])
     def test_engine(self, database_uri: str, name: str, driver: str):
         session_manager = SessionManager(database_uri)
         assert isinstance(session_manager.engine, Engine)

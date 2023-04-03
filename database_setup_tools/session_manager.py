@@ -9,7 +9,8 @@ from sqlalchemy.orm.scoping import scoped_session
 
 
 class SessionManager:
-    """ Manages engines, sessions and connection pools. Thread-safe singleton """
+    """Manages engines, sessions and connection pools. Thread-safe singleton"""
+
     _instances = []
     _lock = threading.Lock()
 
@@ -21,7 +22,7 @@ class SessionManager:
         return cls._get_cached_instance(args, kwargs)
 
     def __init__(self, database_uri: str, **kwargs):
-        """ Session Manager constructor
+        """Session Manager constructor
 
         Args:
             database_uri (str): The URI of the database to manage sessions for
@@ -44,26 +45,26 @@ class SessionManager:
 
     @cached_property
     def database_uri(self) -> str:
-        """ Getter for the database URI """
+        """Getter for the database URI"""
         return self._database_uri
 
     @property
     def engine(self) -> Engine:
-        """ Getter for the engine """
+        """Getter for the engine"""
         return self._engine
 
     def get_session(self) -> Generator[Session, None, None]:
-        """ Provides a (thread safe) scoped session that is wrapped in a context manager """
+        """Provides a (thread safe) scoped session that is wrapped in a context manager"""
         with self._Session() as session:
             yield session
 
     def _get_engine(self, **kwargs) -> Engine:
-        """ Provides a database engine """
+        """Provides a database engine"""
         return create_engine(self.database_uri, **kwargs)
 
     @classmethod
     def _get_cached_instance(cls, args: tuple, kwargs: dict) -> Optional[object]:
-        """ Provides a cached instance of the SessionManager class if existing """
+        """Provides a cached instance of the SessionManager class if existing"""
         for instance, arguments in cls._instances:
             if arguments == (args, kwargs):
                 return instance
