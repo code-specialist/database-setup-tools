@@ -85,7 +85,7 @@ class DatabaseSetup:
             return True
         return False
 
-    def truncate(self, tables: List[SQLModel] | None = None):
+    def truncate(self, tables: Optional[List[SQLModel]] = None):
         """Truncate all tables in the database"""
         tables_to_truncate: List[Table] = self.model_metadata.sorted_tables
         if tables is not None:
