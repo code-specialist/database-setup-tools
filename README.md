@@ -9,12 +9,14 @@ pip install database-setup-tools
 ```
 
 ## Features
+
 - **Database creation on app startup**
 - Thread-safe database **session manager**
 - Opinionated towards `FastAPI` and `SQLModel` but feasible with any other framework or pure `sqlalchemy`
 - Easily use a local database in your tests
 
 ## Planned features
+
 - Database migrations with `Alembic`
 
 ## Example
@@ -67,8 +69,10 @@ if __name__ == '__main__':
 ## Example for pytest
 
 **conftest.py**
+
 ```python
 database_setup = DatabaseSetup(model_metadata=model_metadata, database_uri=DATABASE_URI)
+
 
 def pytest_sessionstart(session):
     database_setup.drop_database()
@@ -76,18 +80,29 @@ def pytest_sessionstart(session):
 ```
 
 **test_users.py**
+
 ```python
 session_manager = SessionManager(database_uri=DATABASE_URI)
 
+
 @pytest.fixture
 def session():
-	with session_manager.get_session() as session:
-		yield session
+    with session_manager.get_session() as session:
+        yield session
+
 
 def test_create_user(session: Session):
-	user = User(name='Test User')
-	session.add(user)
-	session.commit()
-	assert session.query(User).count() == 1
-	assert session.query(User).first().name == 'Test User'
+    user = User(name='Test User')
+    session.add(user)
+    session.commit()
+    assert session.query(User).count() == 1
+    assert session.query(User).first().name == 'Test User'
 ```
+
+## Development
+
+### Testing
+
+1. Spin up databases for local integration tests: `docker-compose -f tests/docker-compose.yaml up -d`
+1. Create virtual environment & install dependencies: `poetry install`
+1. Run tests: `poetry run pytest`

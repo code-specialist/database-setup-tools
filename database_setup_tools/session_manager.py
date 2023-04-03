@@ -1,11 +1,11 @@
 import threading
 from functools import cached_property
-from typing import Iterator, Optional
+from typing import Generator, Optional
 
-import sqlalchemy as sqla
+from sqlalchemy import create_engine
 from sqlalchemy.engine import Engine
-from sqlalchemy.orm import sessionmaker
-from sqlalchemy.orm.scoping import ScopedSession, scoped_session
+from sqlalchemy.orm import Session, sessionmaker
+from sqlalchemy.orm.scoping import scoped_session
 
 
 class SessionManager:
@@ -47,19 +47,19 @@ class SessionManager:
         """ Getter for the database URI """
         return self._database_uri
 
-    @cached_property
+    @property
     def engine(self) -> Engine:
         """ Getter for the engine """
         return self._engine
 
-    def get_session(self) -> Iterator[ScopedSession]:
+    def get_session(self) -> Generator[Session, None, None]:
         """ Provides a (thread safe) scoped session that is wrapped in a context manager """
         with self._Session() as session:
             yield session
 
     def _get_engine(self, **kwargs) -> Engine:
         """ Provides a database engine """
-        return sqla.create_engine(self.database_uri, **kwargs)
+        return create_engine(self.database_uri, **kwargs)
 
     @classmethod
     def _get_cached_instance(cls, args: tuple, kwargs: dict) -> Optional[object]:
