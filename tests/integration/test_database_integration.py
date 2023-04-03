@@ -1,4 +1,4 @@
-from time import sleep
+from typing import Iterator
 
 import pytest
 from sqlalchemy.exc import OperationalError
@@ -7,7 +7,7 @@ from sqlalchemy.orm.scoping import ScopedSession
 from database_setup_tools.session_manager import SessionManager
 from database_setup_tools.setup import DatabaseSetup
 from tests.integration.database_config import DATABASE_URIS
-from tests.sample_model import model_metadata, User
+from tests.sample_model import User, model_metadata
 
 
 @pytest.mark.parametrize('database_uri', DATABASE_URIS)
@@ -20,7 +20,7 @@ class TestDatabaseIntegration:
         setup.drop_database()
 
     @pytest.fixture
-    def database_session(self, database_uri: str) -> ScopedSession:
+    def database_session(self, database_uri: str) -> Iterator[ScopedSession]:
         """ Get a database session """
         session_manager = SessionManager(database_uri)
         return next(session_manager.get_session())
@@ -31,7 +31,7 @@ class TestDatabaseIntegration:
         database_session.execute(f'SELECT * FROM {User.__tablename__}')
 
     def test_create_database_multiple_times(self, database_setup: DatabaseSetup, database_session: ScopedSession):
-        """ Test that the tables are created correctly """
+        """ Test that creating the database multiple times does not cause problems """
         database_setup.create_database()
         # noinspection SqlInjection,SqlDialectInspection
         database_session.execute(f'SELECT * FROM {User.__tablename__}')
