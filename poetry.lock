@@ -737,14 +737,14 @@ sqlcipher = ["sqlcipher3-binary"]
 
 [[package]]
 name = "sqlalchemy-utils"
-version = "0.38.3"
+version = "0.40.0"
 description = "Various utility functions for SQLAlchemy."
 category = "main"
 optional = false
-python-versions = "~=3.6"
+python-versions = ">=3.6"
 files = [
-    {file = "SQLAlchemy-Utils-0.38.3.tar.gz", hash = "sha256:9f9afba607a40455cf703adfa9846584bf26168a0c5a60a70063b70d65051f4d"},
-    {file = "SQLAlchemy_Utils-0.38.3-py3-none-any.whl", hash = "sha256:5c13b5d08adfaa85f3d4e8ec09a75136216fad41346980d02974a70a77988bf9"},
+    {file = "SQLAlchemy-Utils-0.40.0.tar.gz", hash = "sha256:af803089a7929803faeb6173b90f29d1a67ad02f1d1e732f40b054a8eb3c7370"},
+    {file = "SQLAlchemy_Utils-0.40.0-py3-none-any.whl", hash = "sha256:4c7098d4857d5cad1248bf7cd940727aecb75b596a5574b86a93b37079929520"},
 ]
 
 [package.dependencies]
@@ -823,4 +823,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.9"
-content-hash = "4c513b6962f65ccaa2f0d3a2f5030ca08dec58d102213664bdb1e3d71423c9f8"
+content-hash = "02773d9fd1a7a3c103303fabf586279ccc539730e16599b203730239bdbecbf4"
