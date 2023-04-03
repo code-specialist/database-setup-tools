@@ -11,7 +11,7 @@ jobs:
       contents: write
     steps:
       - name: Publish PyPi package
-        uses: code-specialist/pypi-poetry-publish@v1
+        uses: code-specialist/pypi-poetry-publish@v1.1
         with:
           PYTHON_VERSION: "3.9"
           PACKAGE_DIRECTORY: './database_setup_tools/'

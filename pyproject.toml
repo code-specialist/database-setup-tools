@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "database-setup-tools"
-version = "1.0.1"
+version = "1.1.0"
 description = "Tools to easily setup databases opinionated towards FastAPI and SQLModel"
 authors = ["Jonas Scholl <jonas@code-specialist.com>", "Yannic Schröer <yannic@code-specialist.com>"]
 license = "MIT"
@@ -21,6 +21,7 @@ pytest = "7.2.0"
 httpx = "0.23.1"
 mockito = "^1.4.0"
 pytest-mockito = "^0.0.4"
+pre-commit = "^3.2.1"
 
 [build-system]
 requires = ["poetry-core"]
