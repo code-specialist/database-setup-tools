@@ -10,7 +10,7 @@ packages = [{ include = "database_setup_tools" }]
 [tool.poetry.dependencies]
 python = "^3.9"
 sqlalchemy = "^1.4.41"
-sqlalchemy-utils = "^0.38.3"
+sqlalchemy-utils = ">=0.38.3,<0.41.0"
 
 [tool.poetry.dev-dependencies]
 black = "23.1.0"
