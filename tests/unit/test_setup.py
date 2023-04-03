@@ -43,11 +43,14 @@ class TestSetup:
         with pytest.raises(TypeError):
             DatabaseSetup(model_metadata=model_metadata, database_uri=invalid_database_uri)
 
-    def test_database_uri(self, database_setup: DatabaseSetup, database_uri: str):
+    def test_database_uri_property(self, database_setup: DatabaseSetup, database_uri: str):
         assert database_setup.database_uri == database_uri
 
-    def test_model_metadata(self, database_setup: DatabaseSetup):
+    def test_model_metadata_property(self, database_setup: DatabaseSetup):
         assert database_setup.model_metadata == model_metadata
+
+    def test_session_manager_property(self, database_setup: DatabaseSetup, database_uri: str):
+        assert database_setup.session_manager == SessionManager(database_uri=database_uri)
 
     def test_create_database(self, database_setup: DatabaseSetup, database_uri: str, when: Callable, expect: Callable):
         unstub()  # remove stub for create_database method

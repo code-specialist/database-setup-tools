@@ -1,8 +1,9 @@
 import threading
-from typing import Optional
+from typing import List, Optional
 
 import sqlalchemy_utils
-from sqlalchemy import MetaData
+from sqlalchemy import MetaData, Table
+from sqlmodel import SQLModel
 
 from database_setup_tools.session_manager import SessionManager
 
@@ -48,6 +49,15 @@ class DatabaseSetup:
         return self._model_metadata
 
     @property
+    def session_manager(self) -> SessionManager:
+        """Getter for the session manager
+
+        Returns:
+            SessionManager: The session manager
+        """
+        return SessionManager(database_uri=self.database_uri)
+
+    @property
     def database_uri(self) -> str:
         """Getter for the database URI
 
@@ -71,10 +81,25 @@ class DatabaseSetup:
         """Create the database and the tables if not done yet"""
         if not sqlalchemy_utils.database_exists(self.database_uri):
             sqlalchemy_utils.create_database(self.database_uri)
-            session_manager = SessionManager(self.database_uri)
-            self.model_metadata.create_all(session_manager.engine)
+            self.model_metadata.create_all(self.session_manager.engine)
             return True
         return False
+
+    def truncate(self, tables: List[SQLModel] | None = None):
+        """Truncate all tables in the database"""
+        tables_to_truncate: List[Table] = self.model_metadata.sorted_tables
+        if tables is not None:
+            table_names = [table.__tablename__ for table in tables]
+            tables_to_truncate = filter(lambda table: table.name in table_names, tables_to_truncate)
+
+        session = next(self.session_manager.get_session())
+
+        try:
+            tables_with_schema = [f"{table.schema or 'public'}.\"{table.name}\"" for table in tables_to_truncate]
+            session.execute(f"TRUNCATE TABLE {', '.join(tables_with_schema)} CASCADE;")
+            session.commit()
+        finally:
+            session.close()
 
     @classmethod
     def _get_cached_instance(cls, args: tuple, kwargs: dict) -> Optional[object]:
