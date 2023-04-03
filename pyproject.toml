@@ -9,8 +9,8 @@ packages = [{ include = "database_setup_tools" }]
 
 [tool.poetry.dependencies]
 python = "^3.9"
-sqlalchemy = "1.4.41"
-sqlalchemy-utils = "0.38.3"
+sqlalchemy = "^1.4.41"
+sqlalchemy-utils = "^0.38.3"
 
 [tool.poetry.dev-dependencies]
 fastapi = "0.87.0"
