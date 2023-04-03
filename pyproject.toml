@@ -14,8 +14,6 @@ sqlalchemy-utils = "^0.38.3"
 
 [tool.poetry.dev-dependencies]
 black = "23.1.0"
-fastapi = "0.87.0"
-uvicorn = "0.20.0"
 sqlmodel = "0.0.8"
 psycopg2-binary = "^2.9.5"
 pytest-cov = "^4.0.0"
