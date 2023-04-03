@@ -10,16 +10,13 @@ from tests.sample_model import model_metadata
 
 
 class TestSetup:
-
     @pytest.fixture
     def database_uri(self) -> str:
-        return 'sqlite://'
+        return "sqlite://"
 
     @pytest.fixture
     def database_setup(self, when: Callable, database_uri: str) -> DatabaseSetup:
-        when(DatabaseSetup) \
-            .create_database() \
-            .thenReturn(None)
+        when(DatabaseSetup).create_database().thenReturn(None)
 
         yield DatabaseSetup(model_metadata=model_metadata, database_uri=database_uri)
 
@@ -28,20 +25,20 @@ class TestSetup:
         assert database_setup is DatabaseSetup(model_metadata=model_metadata, database_uri=database_uri)
 
     def test_database_setup_is_singleton_with_different_arguments(self, database_setup: DatabaseSetup):
-        database_uri_1, database_uri_2 = 'sqlite://', 'postgresql://'
+        database_uri_1, database_uri_2 = "sqlite://", "postgresql://"
         assert DatabaseSetup(model_metadata=model_metadata, database_uri=database_uri_1) is not DatabaseSetup(model_metadata=model_metadata, database_uri=database_uri_2)
 
     def test_create_database_setup_success(self, expect: Callable, database_uri: str):
         expect(DatabaseSetup, times=1).create_database()
         DatabaseSetup(model_metadata=model_metadata, database_uri=database_uri)
 
-    @pytest.mark.parametrize('invalid_metadata', [None, 'metadata', 42, False])
+    @pytest.mark.parametrize("invalid_metadata", [None, "metadata", 42, False])
     def test_create_database_setup_fail_modelmetadata_invalid_type(self, invalid_metadata: Any, database_uri: str):
         with pytest.raises(TypeError):
             DatabaseSetup(model_metadata=invalid_metadata, database_uri=database_uri)
 
     @staticmethod
-    @pytest.mark.parametrize('invalid_database_uri', [None, model_metadata, 42, False])
+    @pytest.mark.parametrize("invalid_database_uri", [None, model_metadata, 42, False])
     def test_create_database_setup_fail_database_uri_invalid_type(invalid_database_uri: Any):
         with pytest.raises(TypeError):
             DatabaseSetup(model_metadata=model_metadata, database_uri=invalid_database_uri)

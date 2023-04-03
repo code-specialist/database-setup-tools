@@ -8,7 +8,8 @@ from database_setup_tools.session_manager import SessionManager
 
 
 class DatabaseSetup:
-    """ Create the database and the tables if not done yet """
+    """Create the database and the tables if not done yet"""
+
     _instances = []
     _lock = threading.Lock()
 
@@ -20,7 +21,7 @@ class DatabaseSetup:
         return cls._get_cached_instance(args, kwargs)
 
     def __init__(self, model_metadata: MetaData, database_uri: str):
-        """ Set up a database based on its URI and metadata. Will not overwrite existing data.
+        """Set up a database based on its URI and metadata. Will not overwrite existing data.
 
         Args:
             model_metadata (Metadata): The metadata of the models to create the tables for
@@ -39,7 +40,7 @@ class DatabaseSetup:
 
     @property
     def model_metadata(self) -> MetaData:
-        """ Getter for the model metadata
+        """Getter for the model metadata
 
         Returns:
             MetaData: The model metadata
@@ -48,7 +49,7 @@ class DatabaseSetup:
 
     @property
     def database_uri(self) -> str:
-        """ Getter for the database URI
+        """Getter for the database URI
 
         Returns:
             str: The database URI
@@ -56,7 +57,7 @@ class DatabaseSetup:
         return self._database_uri
 
     def drop_database(self) -> bool:
-        """ Drop the database and the tables if possible
+        """Drop the database and the tables if possible
 
         Returns:
             bool: True if the database was dropped, False otherwise
@@ -67,7 +68,7 @@ class DatabaseSetup:
         return False
 
     def create_database(self) -> bool:
-        """ Create the database and the tables if not done yet """
+        """Create the database and the tables if not done yet"""
         if not sqlalchemy_utils.database_exists(self.database_uri):
             sqlalchemy_utils.create_database(self.database_uri)
             session_manager = SessionManager(self.database_uri)
@@ -77,7 +78,7 @@ class DatabaseSetup:
 
     @classmethod
     def _get_cached_instance(cls, args: tuple, kwargs: dict) -> Optional[object]:
-        """ Provides a cached instance of the SessionManager class if existing """
+        """Provides a cached instance of the SessionManager class if existing"""
         for instance, arguments in cls._instances:
             if arguments == (args, kwargs):
                 return instance
