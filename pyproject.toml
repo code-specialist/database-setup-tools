@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "database-setup-tools"
-version = "1.1.0"
+version = "1.2.0"
 description = "Tools to easily setup databases opinionated towards FastAPI and SQLModel"
 authors = ["Jonas Scholl <jonas@code-specialist.com>", "Yannic Schröer <yannic@code-specialist.com>"]
 license = "MIT"
