@@ -612,7 +612,7 @@ files = [
 name = "pydantic"
 version = "1.10.7"
 description = "Data validation and settings management using python type hints"
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=3.7"
 files = [
@@ -924,7 +924,7 @@ url = ["furl (>=0.4.1)"]
 name = "sqlalchemy2-stubs"
 version = "0.0.2a32"
 description = "Typing Stubs for SQLAlchemy 1.4"
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=3.6"
 files = [
@@ -939,7 +939,7 @@ typing-extensions = ">=3.7.4"
 name = "sqlmodel"
 version = "0.0.8"
 description = "SQLModel, SQL databases in Python, designed for simplicity, compatibility, and robustness."
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=3.6.1,<4.0.0"
 files = [
@@ -968,7 +968,7 @@ files = [
 name = "typing-extensions"
 version = "4.5.0"
 description = "Backported and Experimental Type Hints for Python 3.7+"
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=3.7"
 files = [

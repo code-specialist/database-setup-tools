@@ -1,8 +1,8 @@
-from sqlmodel import SQLModel, Field
+from sqlmodel import Field, SQLModel
 
 
-class User(SQLModel, table=True):
-    """User model"""
+class Customer(SQLModel, table=True):
+    """Customer model"""
 
     id: int = Field(index=True, primary_key=True)
     name: str
