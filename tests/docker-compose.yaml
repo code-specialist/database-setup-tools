@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   postgresql-database:
-    image: postgres:15
+    image: postgres:14
     container_name: "database-setup-tools-test-postgres-database"
     command: -c ssl=on -c ssl_cert_file=/var/lib/postgresql/server.crt -c ssl_key_file=/var/lib/postgresql/server.key
     ports:
