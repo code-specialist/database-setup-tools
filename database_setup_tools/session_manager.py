@@ -1,6 +1,6 @@
 import threading
 from functools import cached_property
-from typing import Generator, Optional
+from typing import Any, Generator, Optional
 
 from sqlalchemy import create_engine
 from sqlalchemy.engine import Engine
@@ -21,14 +21,14 @@ class SessionManager:
                     cls._instances.append((super(cls, cls).__new__(cls), (args, kwargs)))
         return cls._get_cached_instance(args, kwargs)
 
-    def __init__(self, database_uri: str, **kwargs):
+    def __init__(self, database_uri: str, **engine_options: dict[str, Any]):
         """Session Manager constructor
 
         Args:
             database_uri (str): The URI of the database to manage sessions for
 
         Keyword Args:
-            **kwargs: Keyword arguments to pass to the engine
+            **engine_options: Keyword arguments to pass to the engine
 
             postgresql:
                 pool_size (int): The maximum number of connections to the database
@@ -39,7 +39,7 @@ class SessionManager:
             raise TypeError("database_uri must be a string")
 
         self._database_uri = database_uri
-        self._engine = self._get_engine(**kwargs)
+        self._engine = self._get_engine(**engine_options)
         self._session_factory = sessionmaker(self.engine)
         self._Session = scoped_session(self._session_factory)
 
