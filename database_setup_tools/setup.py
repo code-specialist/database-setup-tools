@@ -3,7 +3,7 @@ from typing import List, Optional
 
 import sqlalchemy_utils
 from sqlalchemy import MetaData, Table
-from sqlmodel import SQLModel
+from sqlmodel.main import SQLModel, SQLModelMetaclass
 
 from database_setup_tools.session_manager import SessionManager
 
@@ -85,7 +85,7 @@ class DatabaseSetup:
             return True
         return False
 
-    def truncate(self, tables: Optional[List[SQLModel]] = None):
+    def truncate(self, tables: Optional[List[SQLModel | SQLModelMetaclass]] = None):
         """Truncate all tables in the database"""
         tables_to_truncate: List[Table] = self.model_metadata.sorted_tables
         if tables is not None:
