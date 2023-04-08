@@ -1,0 +1,397 @@
+[
+    {
+        "label": "threading",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "threading",
+        "description": "threading",
+        "detail": "threading",
+        "documentation": {}
+    },
+    {
+        "label": "cached_property",
+        "importPath": "functools",
+        "description": "functools",
+        "isExtraImport": true,
+        "detail": "functools",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Generator",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "List",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Iterator",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Callable",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Callable",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "create_engine",
+        "importPath": "sqlalchemy",
+        "description": "sqlalchemy",
+        "isExtraImport": true,
+        "detail": "sqlalchemy",
+        "documentation": {}
+    },
+    {
+        "label": "MetaData",
+        "importPath": "sqlalchemy",
+        "description": "sqlalchemy",
+        "isExtraImport": true,
+        "detail": "sqlalchemy",
+        "documentation": {}
+    },
+    {
+        "label": "Table",
+        "importPath": "sqlalchemy",
+        "description": "sqlalchemy",
+        "isExtraImport": true,
+        "detail": "sqlalchemy",
+        "documentation": {}
+    },
+    {
+        "label": "Engine",
+        "importPath": "sqlalchemy.engine",
+        "description": "sqlalchemy.engine",
+        "isExtraImport": true,
+        "detail": "sqlalchemy.engine",
+        "documentation": {}
+    },
+    {
+        "label": "Engine",
+        "importPath": "sqlalchemy.engine",
+        "description": "sqlalchemy.engine",
+        "isExtraImport": true,
+        "detail": "sqlalchemy.engine",
+        "documentation": {}
+    },
+    {
+        "label": "Session",
+        "importPath": "sqlalchemy.orm",
+        "description": "sqlalchemy.orm",
+        "isExtraImport": true,
+        "detail": "sqlalchemy.orm",
+        "documentation": {}
+    },
+    {
+        "label": "sessionmaker",
+        "importPath": "sqlalchemy.orm",
+        "description": "sqlalchemy.orm",
+        "isExtraImport": true,
+        "detail": "sqlalchemy.orm",
+        "documentation": {}
+    },
+    {
+        "label": "Session",
+        "importPath": "sqlalchemy.orm",
+        "description": "sqlalchemy.orm",
+        "isExtraImport": true,
+        "detail": "sqlalchemy.orm",
+        "documentation": {}
+    },
+    {
+        "label": "scoped_session",
+        "importPath": "sqlalchemy.orm.scoping",
+        "description": "sqlalchemy.orm.scoping",
+        "isExtraImport": true,
+        "detail": "sqlalchemy.orm.scoping",
+        "documentation": {}
+    },
+    {
+        "label": "sqlalchemy_utils",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "sqlalchemy_utils",
+        "description": "sqlalchemy_utils",
+        "detail": "sqlalchemy_utils",
+        "documentation": {}
+    },
+    {
+        "label": "SQLModel",
+        "importPath": "sqlmodel.main",
+        "description": "sqlmodel.main",
+        "isExtraImport": true,
+        "detail": "sqlmodel.main",
+        "documentation": {}
+    },
+    {
+        "label": "SQLModelMetaclass",
+        "importPath": "sqlmodel.main",
+        "description": "sqlmodel.main",
+        "isExtraImport": true,
+        "detail": "sqlmodel.main",
+        "documentation": {}
+    },
+    {
+        "label": "SessionManager",
+        "importPath": "database_setup_tools.session_manager",
+        "description": "database_setup_tools.session_manager",
+        "isExtraImport": true,
+        "detail": "database_setup_tools.session_manager",
+        "documentation": {}
+    },
+    {
+        "label": "SessionManager",
+        "importPath": "database_setup_tools.session_manager",
+        "description": "database_setup_tools.session_manager",
+        "isExtraImport": true,
+        "detail": "database_setup_tools.session_manager",
+        "documentation": {}
+    },
+    {
+        "label": "SessionManager",
+        "importPath": "database_setup_tools.session_manager",
+        "description": "database_setup_tools.session_manager",
+        "isExtraImport": true,
+        "detail": "database_setup_tools.session_manager",
+        "documentation": {}
+    },
+    {
+        "label": "pytest",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "pytest",
+        "description": "pytest",
+        "detail": "pytest",
+        "documentation": {}
+    },
+    {
+        "label": "OperationalError",
+        "importPath": "sqlalchemy.exc",
+        "description": "sqlalchemy.exc",
+        "isExtraImport": true,
+        "detail": "sqlalchemy.exc",
+        "documentation": {}
+    },
+    {
+        "label": "DatabaseSetup",
+        "importPath": "database_setup_tools.setup",
+        "description": "database_setup_tools.setup",
+        "isExtraImport": true,
+        "detail": "database_setup_tools.setup",
+        "documentation": {}
+    },
+    {
+        "label": "DatabaseSetup",
+        "importPath": "database_setup_tools.setup",
+        "description": "database_setup_tools.setup",
+        "isExtraImport": true,
+        "detail": "database_setup_tools.setup",
+        "documentation": {}
+    },
+    {
+        "label": "DATABASE_URIS",
+        "importPath": "tests.integration.database_config",
+        "description": "tests.integration.database_config",
+        "isExtraImport": true,
+        "detail": "tests.integration.database_config",
+        "documentation": {}
+    },
+    {
+        "label": "Customer",
+        "importPath": "tests.sample_model",
+        "description": "tests.sample_model",
+        "isExtraImport": true,
+        "detail": "tests.sample_model",
+        "documentation": {}
+    },
+    {
+        "label": "model_metadata",
+        "importPath": "tests.sample_model",
+        "description": "tests.sample_model",
+        "isExtraImport": true,
+        "detail": "tests.sample_model",
+        "documentation": {}
+    },
+    {
+        "label": "model_metadata",
+        "importPath": "tests.sample_model",
+        "description": "tests.sample_model",
+        "isExtraImport": true,
+        "detail": "tests.sample_model",
+        "documentation": {}
+    },
+    {
+        "label": "contextmanager",
+        "importPath": "contextlib",
+        "description": "contextlib",
+        "isExtraImport": true,
+        "detail": "contextlib",
+        "documentation": {}
+    },
+    {
+        "label": "unstub",
+        "importPath": "mockito",
+        "description": "mockito",
+        "isExtraImport": true,
+        "detail": "mockito",
+        "documentation": {}
+    },
+    {
+        "label": "Field",
+        "importPath": "sqlmodel",
+        "description": "sqlmodel",
+        "isExtraImport": true,
+        "detail": "sqlmodel",
+        "documentation": {}
+    },
+    {
+        "label": "SQLModel",
+        "importPath": "sqlmodel",
+        "description": "sqlmodel",
+        "isExtraImport": true,
+        "detail": "sqlmodel",
+        "documentation": {}
+    },
+    {
+        "label": "SessionManager",
+        "kind": 6,
+        "importPath": "database_setup_tools.session_manager",
+        "description": "database_setup_tools.session_manager",
+        "peekOfCode": "class SessionManager:\n    \"\"\"Manages engines, sessions and connection pools. Thread-safe singleton\"\"\"\n    _instances = []\n    _lock = threading.Lock()\n    def __new__(cls, *args, **kwargs):\n        if not cls._get_cached_instance(args, kwargs):\n            with cls._lock:\n                if not cls._get_cached_instance(args, kwargs):\n                    cls._instances.append((super(cls, cls).__new__(cls), (args, kwargs)))\n        return cls._get_cached_instance(args, kwargs)",
+        "detail": "database_setup_tools.session_manager",
+        "documentation": {}
+    },
+    {
+        "label": "DatabaseSetup",
+        "kind": 6,
+        "importPath": "database_setup_tools.setup",
+        "description": "database_setup_tools.setup",
+        "peekOfCode": "class DatabaseSetup:\n    \"\"\"Create the database and the tables if not done yet\"\"\"\n    _instances = []\n    _lock = threading.Lock()\n    def __new__(cls, *args, **kwargs):\n        if not cls._get_cached_instance(args, kwargs):\n            with cls._lock:\n                if not cls._get_cached_instance(args, kwargs):\n                    cls._instances.append((super(cls, cls).__new__(cls), (args, kwargs)))\n        return cls._get_cached_instance(args, kwargs)",
+        "detail": "database_setup_tools.setup",
+        "documentation": {}
+    },
+    {
+        "label": "DATABASE_URIS",
+        "kind": 5,
+        "importPath": "tests.integration.database_config",
+        "description": "tests.integration.database_config",
+        "peekOfCode": "DATABASE_URIS = [\n    \"postgresql+psycopg2://postgres:postgres@localhost:5432/test\",  # PostgreSQL\n    \"postgresql+psycopg2://postgres:postgres@localhost:5432/test?sslmode=require\",  # PostgreSQL with SSL\n]",
+        "detail": "tests.integration.database_config",
+        "documentation": {}
+    },
+    {
+        "label": "TestDatabaseIntegration",
+        "kind": 6,
+        "importPath": "tests.integration.test_database_integration",
+        "description": "tests.integration.test_database_integration",
+        "peekOfCode": "class TestDatabaseIntegration:\n    #\n    # Fixtures\n    #\n    @pytest.fixture\n    def database_setup(self, database_uri: str) -> DatabaseSetup:\n        setup = DatabaseSetup(model_metadata=model_metadata, database_uri=database_uri)\n        setup.drop_database()\n        setup.create_database()\n        yield setup",
+        "detail": "tests.integration.test_database_integration",
+        "documentation": {}
+    },
+    {
+        "label": "TestSessionManager",
+        "kind": 6,
+        "importPath": "tests.unit.test_session_manager",
+        "description": "tests.unit.test_session_manager",
+        "peekOfCode": "class TestSessionManager:\n    @pytest.fixture\n    def database_uri(self) -> str:\n        return \"sqlite://\"\n    @pytest.fixture\n    def session_manager(self, database_uri: str) -> SessionManager:\n        yield SessionManager(database_uri=database_uri)\n    @pytest.mark.parametrize(\"invalid_database_uri\", [None, (), 42, False])\n    def test_create_session_manager_fail_invalid_database_uri_type(self, invalid_database_uri: Any):\n        with pytest.raises(TypeError):",
+        "detail": "tests.unit.test_session_manager",
+        "documentation": {}
+    },
+    {
+        "label": "TestSetup",
+        "kind": 6,
+        "importPath": "tests.unit.test_setup",
+        "description": "tests.unit.test_setup",
+        "peekOfCode": "class TestSetup:\n    @pytest.fixture\n    def database_uri(self) -> str:\n        return \"sqlite://\"\n    @pytest.fixture\n    def database_setup(self, when: Callable, database_uri: str) -> DatabaseSetup:\n        when(DatabaseSetup).create_database().thenReturn(None)\n        yield DatabaseSetup(model_metadata=model_metadata, database_uri=database_uri)\n    @pytest.mark.parametrize(\"database_uri\", [\"sqlite://\", \"postgresql://\"])\n    def test_database_setup_is_singleton_with_same_arguments(self, database_setup: DatabaseSetup, database_uri: str):",
+        "detail": "tests.unit.test_setup",
+        "documentation": {}
+    },
+    {
+        "label": "Customer",
+        "kind": 6,
+        "importPath": "tests.sample_model",
+        "description": "tests.sample_model",
+        "peekOfCode": "class Customer(SQLModel, table=True):\n    \"\"\"Customer model\"\"\"\n    id: int = Field(index=True, primary_key=True)\n    name: str\nmodel_metadata = SQLModel.metadata",
+        "detail": "tests.sample_model",
+        "documentation": {}
+    },
+    {
+        "label": "model_metadata",
+        "kind": 5,
+        "importPath": "tests.sample_model",
+        "description": "tests.sample_model",
+        "peekOfCode": "model_metadata = SQLModel.metadata",
+        "detail": "tests.sample_model",
+        "documentation": {}
+    }
+]
