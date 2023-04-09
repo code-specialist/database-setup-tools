@@ -1,6 +1,14 @@
-# Database tools
+# Database Setup Tools for SQLModel / SQLAlchemy
 
-Easy to understand and use tools that help you to create databases and interact with them.
+[![CodeQL](https://github.com/code-specialist/database-setup-tools/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/code-specialist/database-setup-tools/actions/workflows/github-code-scanning/codeql)
+[![Test](https://github.com/code-specialist/database-setup-tools/actions/workflows/test.yaml/badge.svg)](https://github.com/code-specialist/database-setup-tools/actions/workflows/test.yaml)
+![Py3.9](https://img.shields.io/badge/-Python%203.9-brightgreen)
+![Py3.10](https://img.shields.io/badge/-Python%203.10-brightgreen)
+![Py3.11](https://img.shields.io/badge/-Python%203.11-brightgreen)
+
+Simplified database lifecycle and session management based on [SQLModel](https://sqlmodel.tiangolo.com/) / [SQLAlchemy](https://www.sqlalchemy.org/).
+
+Any contributions are welcome! But we only accept pull requests that come with tests.
 
 ## Installation
 
@@ -12,91 +20,54 @@ pip install database-setup-tools
 
 - **Database creation on app startup**
 - Thread-safe database **session manager**
-- Opinionated towards `FastAPI` and `SQLModel` but feasible with any other framework or pure `sqlalchemy`
+- Opinionated towards `SQLModel` but feasible with any other framework or pure `sqlalchemy`
 - Easily use a local database in your tests
 
-## Planned features
+## Usage
 
-- Database migrations with `Alembic`
-
-## Example
+In order to use this library, you need some SQLModel or SQLAlchemy tables and a URI to connect to your database.
+With this in place, the `DatabaseSetup` instance can be created - which contains all provided tools and also automatically
+creates the database including all tables.
 
 ```python
-import random
-
-import uvicorn
-from fastapi import FastAPI, Depends
-from sqlmodel import Session, SQLModel, Field
-
-from database_setup_tools.session_manager import SessionManager
-from database_setup_tools.setup import DatabaseSetup
-
-DATABASE_URI = "sqlite:///test.db"
-
-app = FastAPI()
-session_manager = SessionManager(database_uri=DATABASE_URI)
+from sqlmodel import Field, SQLModel
+from database_setup_tools import DatabaseSetup
 
 
 class User(SQLModel, table=True):
-    """ User model """
+    """ User database entity / table """
     id: int = Field(index=True, primary_key=True)
     name: str
 
 
-model_metadata = SQLModel.metadata
-
-
-@app.post('/users/', response_model=User)
-def add_random_user(session: Session = Depends(session_manager.get_session)):
-    """ Endpoint to add a user with a random name """
-    user = User(name=f'User {random.randint(0, 100)}')
-    session.add(user)
-    session.commit()
-    return user
-
-
-@app.get('/users/', response_model=list[User])
-def get_all_users(session: Session = Depends(session_manager.get_session)):
-    """ Endpoint to get all users """
-    return session.query(User).all()
-
-
-if __name__ == '__main__':
-    database_setup = DatabaseSetup(model_metadata=model_metadata, database_uri=DATABASE_URI)
-    uvicorn.run(app, host='0.0.0.0', port=8080)
+# create database & tables, establish connection with session pool
+database_setup = DatabaseSetup(
+    model_metadata = SQLModel.metadata,
+    database_uri="postgresql+psycopg2://postgres:postgres@localhost:5432/database",
+)
 ```
 
-## Example for pytest
+> Note: The `DatabaseSetup` class acts as singleton, so if you create multiple instances with the same
+> set of parameters, you will always get the same instance back instead of creating a new one.
 
-**conftest.py**
+After the setup is created, you can get a scoped session via the provided session manager and use it
+for database transactions.
 
 ```python
-database_setup = DatabaseSetup(model_metadata=model_metadata, database_uri=DATABASE_URI)
+# get scoped session
+session = next(database_setup.session_manager.get_session())
 
-
-def pytest_sessionstart(session):
-    database_setup.drop_database()
-    database_setup.create_database()
+# do stuff in session
+user = User(name="Alice")
+session.add(user)
+session.commit()
 ```
 
-**test_users.py**
+The `DatabaseSetup` instance also provides lifecycle methods allowing to manually control the database:
 
 ```python
-session_manager = SessionManager(database_uri=DATABASE_URI)
-
-
-@pytest.fixture
-def session():
-    with session_manager.get_session() as session:
-        yield session
-
-
-def test_create_user(session: Session):
-    user = User(name='Test User')
-    session.add(user)
-    session.commit()
-    assert session.query(User).count() == 1
-    assert session.query(User).first().name == 'Test User'
+database_setup.create_database()
+database_setup.drop_database()
 ```
 
 ## Development
