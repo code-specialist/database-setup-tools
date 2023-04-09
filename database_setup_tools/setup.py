@@ -1,4 +1,5 @@
 import threading
+from ctypes import Union
 from typing import Any, List, Optional
 
 import sqlalchemy_utils
@@ -88,7 +89,7 @@ class DatabaseSetup:
             return True
         return False
 
-    def truncate(self, tables: Optional[List[SQLModel | SQLModelMetaclass]] = None):
+    def truncate(self, tables: Optional[List[Union[SQLModel, SQLModelMetaclass]]] = None):
         """Truncate all tables in the database"""
         tables_to_truncate: List[Table] = self.model_metadata.sorted_tables
         if tables is not None:
