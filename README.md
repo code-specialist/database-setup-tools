@@ -2,9 +2,6 @@
 
 [![CodeQL](https://github.com/code-specialist/database-setup-tools/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/code-specialist/database-setup-tools/actions/workflows/github-code-scanning/codeql)
 [![Test](https://github.com/code-specialist/database-setup-tools/actions/workflows/test.yaml/badge.svg)](https://github.com/code-specialist/database-setup-tools/actions/workflows/test.yaml)
-![Py3.9](https://img.shields.io/badge/-Python%203.9-brightgreen)
-![Py3.10](https://img.shields.io/badge/-Python%203.10-brightgreen)
-![Py3.11](https://img.shields.io/badge/-Python%203.11-brightgreen)
 
 Simplified database lifecycle and session management based on [SQLModel](https://sqlmodel.tiangolo.com/) / [SQLAlchemy](https://www.sqlalchemy.org/).
 
