@@ -1,6 +1,5 @@
 import threading
-from ctypes import Union
-from typing import Any, List, Optional
+from typing import Any, List, Optional, Union
 
 import sqlalchemy_utils
 from sqlalchemy import MetaData, Table
