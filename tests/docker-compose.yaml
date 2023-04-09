@@ -4,6 +4,10 @@ services:
   postgresql-database:
     image: postgres:15
     container_name: "database-setup-tools-test-postgres-database"
+    command: >
+     -c ssl=on
+     -c ssl_cert_file=/etc/ssl/certs/ssl-cert-snakeoil.pem
+     -c ssl_key_file=/etc/ssl/private/ssl-cert-snakeoil.key
     ports:
       - "5432:5432"
     environment:

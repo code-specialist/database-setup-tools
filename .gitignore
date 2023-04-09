@@ -6,6 +6,7 @@ __pycache__/
 # IDE/OS
 .idea
 .DS_Store
+.vscode/PythonImportHelper-v2-Completion.json
 
 test.db
 test.db-journal

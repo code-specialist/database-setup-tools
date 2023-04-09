@@ -1,5 +1,5 @@
 import threading
-from typing import List, Optional
+from typing import Any, List, Optional, Union
 
 import sqlalchemy_utils
 from sqlalchemy import MetaData, Table
@@ -21,13 +21,15 @@ class DatabaseSetup:
                     cls._instances.append((super(cls, cls).__new__(cls), (args, kwargs)))
         return cls._get_cached_instance(args, kwargs)
 
-    def __init__(self, model_metadata: MetaData, database_uri: str):
+    def __init__(self, model_metadata: MetaData, database_uri: str, **engine_options: dict[str, Any]):
         """Set up a database based on its URI and metadata. Will not overwrite existing data.
 
         Args:
             model_metadata (Metadata): The metadata of the models to create the tables for
             database_uri (str): The URI of the database to create the tables for
 
+        Keyword Args:
+            **engine_options: Keyword arguments to pass to the engine
         """
         if not isinstance(model_metadata, MetaData):
             raise TypeError("model_metadata must be a MetaData")
@@ -37,6 +39,7 @@ class DatabaseSetup:
 
         self._model_metadata = model_metadata
         self._database_uri = database_uri
+        self._engine_options = engine_options
         self.create_database()
 
     @property
@@ -55,7 +58,7 @@ class DatabaseSetup:
         Returns:
             SessionManager: The session manager
         """
-        return SessionManager(database_uri=self.database_uri)
+        return SessionManager(database_uri=self.database_uri, **self._engine_options)
 
     @property
     def database_uri(self) -> str:
@@ -85,7 +88,7 @@ class DatabaseSetup:
             return True
         return False
 
-    def truncate(self, tables: Optional[List[SQLModel | SQLModelMetaclass]] = None):
+    def truncate(self, tables: Optional[List[Union[SQLModel, SQLModelMetaclass]]] = None):
         """Truncate all tables in the database"""
         tables_to_truncate: List[Table] = self.model_metadata.sorted_tables
         if tables is not None:
