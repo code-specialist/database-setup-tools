@@ -21,7 +21,7 @@ pytest = "7.3.0"
 httpx = "^0.23.1"
 mockito = "^1.4.0"
 pytest-mockito = "^0.0.4"
-pre-commit = "^3.2.1"
+pre-commit = "^3.3.1"
 
 [build-system]
 requires = ["poetry-core"]
